@@ -23,7 +23,7 @@ Device           Size
 # -d ключ указывает номер диска
 python idisk.py -d 1
 Device           Size
-/dev/sda       916.8G
+/dev/sda1       916.8G
 ```
 
 Выводит список жестких дисков или партиций с указанной единицой измерения объёма информации
@@ -38,7 +38,7 @@ Device           Size
 ```
 python idisk.py -u M -d 1
 Device           Size
-/dev/sda    938772.0M
+/dev/sda1    938772.0M
 ```
 
 ---
