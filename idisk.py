@@ -140,7 +140,7 @@ def get_info_of_disks_class():
         return LinuxInfoOfDisks
     elif sys.platform == 'win32':
         return WindowsInfoOfDisks
-    raise Exception('The platform is not supported')
+    raise Exception('{} platform is not supported'.format(sys.platform))
 
 
 def display(measure, device_number=None):
