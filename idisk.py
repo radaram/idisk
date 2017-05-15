@@ -6,12 +6,17 @@ from collections import OrderedDict
 
 import psutil
 
+from exceptions import (
+    DiskExistsException, MeasureException, PlatformSupportException
+)
+
+
 if sys.platform == 'linux':
     import pyudev
 elif sys.platform == 'win32':
     import wmi
 else:
-    raise Exception('The platform is not supported')
+    raise PlatformSupportException('The platform is not supported')
 
 
 class InfoOfDisks(metaclass=ABCMeta):
@@ -30,10 +35,6 @@ class InfoOfDisks(metaclass=ABCMeta):
 
     def get_size(self, path):
         return psutil.disk_usage(path).total
-
-
-class MeasureException(Exception):
-    pass
 
 
 class Printer(object):
@@ -74,10 +75,6 @@ class Printer(object):
             )
         number = round(bytes / self.SIZES[measure], 1)
         return '{}{}'.format(number, measure)
-
-
-class DiskExistsException(Exception):
-    pass
 
 
 class LinuxInfoOfDisks(InfoOfDisks):
@@ -140,7 +137,9 @@ def get_info_of_disks_class():
         return LinuxInfoOfDisks
     elif sys.platform == 'win32':
         return WindowsInfoOfDisks
-    raise Exception('{} platform is not supported'.format(sys.platform))
+    raise PlatformSupportException(
+        '{} platform is not supported'.format(sys.platform)
+    )
 
 
 def display(measure, device_number=None):

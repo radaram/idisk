@@ -2,6 +2,7 @@ from unittest import mock
 
 import pytest
 
+from exceptions import PlatformSupportException
 from idisk import (Printer, LinuxInfoOfDisks, WindowsInfoOfDisks,
                    display, get_info_of_disks_class)
 
@@ -37,5 +38,5 @@ def test_get_info_of_disks_class_win():
 
 @mock.patch('sys.platform', 'osx')
 def test_get_info_of_disks_class_other():
-    with pytest.raises(Exception):
+    with pytest.raises(PlatformSupportException):
         get_info_of_disks_class()
