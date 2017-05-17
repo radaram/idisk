@@ -72,7 +72,7 @@ class Printer(object):
 
 class LinuxInfoOfDisks(InfoOfDisks):
     # http://man7.org/linux/man-pages/man8/lsblk.8.html
-    command = ['lsblk', '-b', '-J', '-o', 'NAME,SIZE']
+    command = ['lsblk', '-b', '-J', '-o', 'NAME,SIZE,TYPE']
 
     def physical_disks(self):
         self.command.append('-d')
