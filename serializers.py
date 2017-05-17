@@ -87,12 +87,6 @@ class ListSerializer(Serializer):
             self.child(item).data for item in data
         ]
 
-    def __str__(self):
-        pass
-
-    def __repr__(self):
-        return self
-
 
 class DiskSerializer(Serializer):
     name = CharField()
