@@ -61,12 +61,9 @@ class Serializer(object):
         res = Disk()
         for field_name, value in data.items():
             field_name = field_name.lower()
-            if not hasattr(self, field_name):
-                raise ValidateError(
-                    'Does not exist field {}!'.format(field_name)
-                )
-            setattr(self, field_name, value)
-            res[field_name] = getattr(self, field_name)
+            if hasattr(self, field_name):
+                setattr(self, field_name, value)
+                res[field_name] = getattr(self, field_name)
         return res
 
     @property
@@ -98,7 +95,10 @@ class LinuxPhysicalListDiskSerializer(ListSerializer):
 
     def to_representation(self, data):
         devices = json.loads(data)['blockdevices']
-        return super().to_representation(devices)
+        return [
+            self.child(item).data for item in devices
+            if item.get('type') == 'disk'
+        ]
 
 
 class LinuxLogicalDiskDiskSerializer(ListSerializer):
@@ -115,6 +115,7 @@ class LinuxLogicalDiskListSerializer(ListSerializer):
 
         return [
             self.child(item['children']).data for item in devices
+            if item.get('type') == 'disk'
         ]
 
 
