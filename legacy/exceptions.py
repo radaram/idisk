@@ -9,7 +9,3 @@ class DiskExistsException(Exception):
 
 class PlatformSupportException(Exception):
     pass
-
-
-class ValidateError(Exception):
-    pass
