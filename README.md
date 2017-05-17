@@ -13,32 +13,32 @@
 ```
 python idisk.py
 
-Device           Size
-/dev/sda       916.8G
-/dev/sdb        14.6G
+Device                               Size               Number
+sda                                931.5G                    1
+sdb                                 14.9G                    2
 ```
 
 Выводит список партиций с их размерами, содержащихся на диске с указанным номером
 ```
-# -d ключ указывает номер диска
-python idisk.py -d 1
-Device           Size
-/dev/sda1       916.8G
+python idisk.py 1
+Device                              Total
+sda1                               931.5G
 ```
 
 Выводит список жестких дисков или партиций с указанной единицой измерения объёма информации
 ```
 # -u ключ указывает единицу измерения
 python idisk.py -u M
-Device           Size
-/dev/sda    938772.0M
-/dev/sdb     14967.0M
+Device                               Size               Number
+sda                             953869.7M                    1
+sdb                              15272.1M                    2
+
 ```
 
 ```
-python idisk.py -u M -d 1
-Device           Size
-/dev/sda1    938772.0M
+python idisk.py 1 -u M
+Device                              Total
+sda1                            953868.7M
 ```
 
 ---
